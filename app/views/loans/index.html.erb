@@ -1,0 +1,28 @@
+<h1>Registered Users</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Wallet Amount</th>
+      <th>Interest Rate</th>
+      <th>State</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @loans.each do |loan| %>
+      <tr>
+        <td><%= loan.user.name %></td>
+        <td><%= loan.user.email %></td>
+        <td><%= loan.user.wallet.amount %></td>
+        <td><%= loan.interest_rate %></td>
+        <td><%= loan.state %></td>
+        <td>
+          <%= link_to 'Show', loan_path(loan), class: 'btn btn-info' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

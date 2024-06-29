@@ -1,0 +1,23 @@
+<h1>Loan Details</h1>
+
+<p>
+  <strong>User:</strong>
+  <%= @loan.user.name %>
+</p>
+
+<p>
+  <strong>Wallet Amount:</strong>
+  <%= @loan.user.wallet.amount %>
+</p>
+
+<p>
+  <strong>State:</strong>
+  <%= @loan.state %>
+</p>
+
+<p>
+  <strong>Interest Rate:</strong>
+  <%= @loan.interest_rate %>
+</p>
+
+<%= link_to 'Back', loans_path, class: 'btn btn-secondary' %>
