@@ -1,5 +1,15 @@
 Rails.application.routes.draw do
-  get 'home/index'
+
+  resources :home, only: :index
+  resources :loans do
+    member do
+      patch :approve
+      patch :reject
+      patch :confirm_interest_rate
+      patch :reject_interest_rate
+      patch :repay
+    end
+  end
 
   devise_for :users, controllers: {
     sessions: 'users/sessions',

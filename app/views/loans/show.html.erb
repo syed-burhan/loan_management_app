@@ -6,13 +6,23 @@
 </p>
 
 <p>
+  <strong>Requested Date Time:</strong>
+  <%= @loan.created_at %>
+</p>
+
+<p>
   <strong>Wallet Amount:</strong>
   <%= @loan.user.wallet.amount %>
 </p>
 
 <p>
+  <strong>Loan Amount:</strong>
+  <%= @loan.loan_amount %>
+</p>
+
+<p>
   <strong>State:</strong>
-  <%= @loan.state %>
+  <%= @loan.state.capitalize %>
 </p>
 
 <p>

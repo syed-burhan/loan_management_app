@@ -1,0 +1,12 @@
+<h1>Request a New Loan</h1>
+
+<%= form_for @loan do |f| %>
+  <div class="form-group">
+    <%= f.label :loan_amount %>
+    <%= f.number_field :loan_amount, class: 'form-control' %>
+  </div>
+
+  <%= f.submit 'Request Loan', class: 'btn btn-primary' %>
+<% end %>
+
+<%= link_to 'Back to Loans', loans_path, class: 'btn btn-secondary' %>

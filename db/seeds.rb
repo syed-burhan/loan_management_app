@@ -9,5 +9,4 @@ admin = User.find_by(email: "admin@example.com")
 if admin.nil?
     admin_user = User.create!(name: "Admin", email: "admin@example.com", password: "Admin@123", password_confirmation:"Admin@123", role: admin_role)
     admin_user.create_wallet!(amount: 1000000)
-    admin_user.loans.create!(interest_rate: 5)
 end

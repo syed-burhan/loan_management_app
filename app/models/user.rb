@@ -13,7 +13,6 @@ class User < ApplicationRecord
   validates :name, presence: true
   validates :encrypted_password, presence: true, length: { minimum: 6 }
 
-  after_create :create_default_loan, if: -> { role.name == "User" }
   after_create :create_default_wallet, if: -> { role.name == "User" }
 
   # Return boolean if User is Admin
@@ -26,11 +25,6 @@ class User < ApplicationRecord
   # Assign default Role as User while registration
   def assign_default_user_role
     self.role = Role.find_by(name: "User")
-  end
-
-  # Creates default interest_rate for the registered user
-  def create_default_loan
-    loans.create!(interest_rate: 5)
   end
 
   # Creates default wallet amount for the registered user

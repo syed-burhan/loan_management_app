@@ -1,0 +1,47 @@
+<div class="filter-links">
+  <%= link_to 'All', home_index_path, class: 'btn btn-secondary' %>
+  <%= link_to 'Requested', home_index_path(state: 'requested'), class: 'btn btn-secondary' %>
+  <%= link_to 'Approved', home_index_path(state: 'approved'), class: 'btn btn-secondary' %>
+  <%= link_to 'Active', home_index_path(state: 'open'), class: 'btn btn-secondary' %>
+  <%= link_to 'Repaid', home_index_path(state: 'closed'), class: 'btn btn-secondary' %>
+</div>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Wallet Amount</th>
+      <th>Loan Amount</th>
+      <th>Interest Rate</th>
+      <th>State</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @loans.each do |loan| %>
+      <tr>
+        <td><%= loan.user.name %></td>
+        <td><%= loan.user.email %></td>
+        <td><%= loan.user.wallet.amount %></td>
+        <td><%= loan.loan_amount %></td>
+        <td><%= loan.interest_rate %></td>
+        <td><%= loan.state.capitalize %></td>
+        <td>
+          <% if loan.requested? %>
+            <%= form_for loan, url: approve_loan_path(loan), method: :patch do |f| %>
+              <div class="form-group">
+                <%= f.label :interest_rate %>
+                <%= f.number_field :interest_rate, value: loan.interest_rate || 5.0, step: :any, class: 'form-control' %>
+              </div>
+              <%= f.submit 'Approve', class: 'btn btn-success' %>
+            <% end %>
+            <%= link_to 'Reject', reject_loan_path(loan), method: :patch, class: 'btn btn-danger' %>
+          <% else %>
+            <%= link_to 'Show', loan_path(loan), class: 'btn btn-info' %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
