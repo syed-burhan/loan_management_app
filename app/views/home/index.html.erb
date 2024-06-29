@@ -1,0 +1,7 @@
+<h4>My Wallet Amount = <%= current_user.wallet.amount %> </h4>
+
+<% if current_user.admin? %>
+  <%= render "loans/index", loans: @loans %>
+<% else %>
+  <%= render "loans/user_loans", loans: @loans %>
+<% end %>

@@ -1,0 +1,30 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th>Loan Amount</th>
+      <th>Interest Rate</th>
+      <th>State</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% loans.each do |loan| %>
+      <tr>
+        <td><%= loan.loan_amount %></td>
+        <td><%= loan.interest_rate %></td>
+        <td><%= loan.state.capitalize %></td>
+        <td>
+          <% if loan.approved? %>
+            <%= link_to 'Confirm Interest Rate', confirm_interest_rate_loan_path(loan), method: :patch, class: 'btn btn-success' %>
+            <%= link_to 'Reject Interest Rate', reject_interest_rate_loan_path(loan), method: :patch, class: 'btn btn-danger' %>
+          <% elsif loan.open? %>
+            <%= link_to 'Repay Loan', repay_loan_path(loan), method: :patch, class: 'btn btn-primary' %>
+          <% end %>
+          <%= link_to 'Show', loan_path(loan), class: 'btn btn-info' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to 'Request New Loan', new_loan_path, class: 'btn btn-primary' %>
