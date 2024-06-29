@@ -19,7 +19,11 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav">
-
+            <% if user_signed_in? && current_user.admin? %>
+              <li class="nav-item">
+                <%= link_to 'Loans', home_index_path, class: 'nav-link' %>
+              </li>
+            <% end %>
           </ul>
         </div>
         <div class="collapse navbar-collapse" id="navbarNav">
