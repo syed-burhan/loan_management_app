@@ -3,11 +3,11 @@ Rails.application.routes.draw do
   resources :home, only: :index
   resources :loans do
     member do
-      patch :approve
-      patch :reject
-      patch :confirm_interest_rate
-      patch :reject_interest_rate
-      patch :repay
+      get :approve
+      get :reject
+      get :confirm_interest_rate
+      get :reject_interest_rate
+      get :repay
     end
   end
 
