@@ -53,6 +53,12 @@ gem 'devise', '~> 4.9', '>= 4.9.4'
 # Simple authorization solution for Rails.
 gem 'cancancan', '~> 3.6', '>= 3.6.1'
 
+# Simple, efficient background processing for Ruby
+gem 'sidekiq', '~> 7.2', '>= 7.2.4'
+
+# A Ruby client that tries to match Redis' API one-to-one, while still providing an idiomatic interface
+gem 'redis', '~> 5.2'
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "pry"

@@ -5,8 +5,7 @@ Rails.application.routes.draw do
     member do
       patch :approve
       patch :reject
-      patch :confirm_interest_rate
-      patch :reject_interest_rate
+      patch :confirm
       patch :repay
     end
   end

@@ -16,6 +16,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_29_164041) do
 
   create_table "loans", force: :cascade do |t|
     t.decimal "loan_amount", precision: 10, scale: 2
+    t.decimal "total_amount", precision: 10, scale: 2, default: "0.0"
     t.string "state", default: "Requested"
     t.decimal "interest_rate", precision: 5, scale: 2
     t.bigint "user_id", null: false

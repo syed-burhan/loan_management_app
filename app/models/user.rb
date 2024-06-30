@@ -15,6 +15,11 @@ class User < ApplicationRecord
 
   after_create :create_default_wallet, if: -> { role.name == "User" }
 
+  # Admin user
+  def self.admin
+    find_by(role: Role.find_by(name: 'Admin'))
+  end
+
   # Return boolean if User is Admin
   def admin?
     role.name == "Admin"

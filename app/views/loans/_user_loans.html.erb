@@ -4,6 +4,7 @@
       <th>Loan Amount</th>
       <th>Interest Rate</th>
       <th>State</th>
+      <th>Total Amount(Principal+IR)</th>
       <th>Actions</th>
     </tr>
   </thead>
@@ -13,10 +14,11 @@
         <td><%= loan.loan_amount %></td>
         <td><%= loan.interest_rate %></td>
         <td><%= loan.state.capitalize %></td>
+        <td><%= loan.total_amount %></td>
         <td>
           <% if loan.approved? %>
-            <%= link_to 'Confirm Interest Rate', confirm_interest_rate_loan_path(loan), method: :patch, class: 'btn btn-success' %>
-            <%= link_to 'Reject Interest Rate', reject_interest_rate_loan_path(loan), method: :patch, class: 'btn btn-danger' %>
+            <%= link_to 'Confirm Interest Rate', confirm_loan_path(loan), method: :patch, class: 'btn btn-success' %>
+            <%= link_to 'Reject Interest Rate', reject_loan_path(loan), method: :patch, class: 'btn btn-danger' %>
           <% elsif loan.open? %>
             <%= link_to 'Repay Loan', repay_loan_path(loan), method: :patch, class: 'btn btn-primary' %>
           <% end %>
@@ -27,4 +29,6 @@
   </tbody>
 </table>
 
-<%= link_to 'Request New Loan', new_loan_path, class: 'btn btn-primary' %>
+<% unless Loan.loan_exists?(current_user) %>
+  <%= link_to 'Request New Loan', new_loan_path, class: 'btn btn-primary' %>
+<% end %>
