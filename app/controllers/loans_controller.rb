@@ -27,6 +27,7 @@ class LoansController < ApplicationController
 
   def approve
     @loan = Loan.find(params[:id])
+    redirect_to home_index_path, alert: 'Low Wallet balance, Unable to approve loan.' if @loan.loan_amount > current_user.wallet.amount
     if @loan.update(state: 'approved')
       redirect_to home_index_path, notice: 'Loan approved successfully.'
     else
@@ -45,7 +46,14 @@ class LoansController < ApplicationController
 
   def confirm_interest_rate
     @loan = Loan.find(params[:id])
-    if @loan.update(state: 'open')
+    loan_amount = @loan.loan_amount
+
+    admin_wallet = User.admin.wallet
+    user_wallet = @loan.user.wallet
+
+    if admin_wallet.update!(amount: admin_wallet.amount - loan_amount) && 
+      user_wallet.update!(amount: user_wallet.amount + loan_amount) && 
+      @loan.update!(state: 'open')
       redirect_to home_index_path, notice: 'Interest rate confirmed successfully.'
     else
       redirect_to home_index_path, alert: 'Unable to confirm interest rate.'
