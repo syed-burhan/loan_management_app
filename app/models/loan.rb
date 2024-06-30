@@ -2,7 +2,8 @@ class Loan < ApplicationRecord
   belongs_to :user, inverse_of: :loans
 
   validates :state, presence: true
-  validates :interest_rate, presence: true, numericality: true
+  validates :interest_rate, presence: true, numericality: { greater_than: 0, less_than: 10**8 }
+  validates :loan_amount, presence: true, numericality: { greater_than: 0, less_than: 10**8 }
 
   enum state: { requested: 'Requested', approved: 'Approved', open: 'Open', closed: 'Closed', rejected: 'Rejected' }
 

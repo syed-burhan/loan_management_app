@@ -16,7 +16,7 @@ class LoansController < ApplicationController
   end
 
   def create
-    @loan = current_user.loans.build(loan_params)
+    @loan = current_user.loans.new(loan_params)
     @loan.interest_rate = 5
     if @loan.save
       redirect_to home_index_path, notice: 'Loan request submitted successfully.'
@@ -27,8 +27,8 @@ class LoansController < ApplicationController
 
   def approve
     @loan = Loan.find(params[:id])
-    redirect_to home_index_path, alert: 'Low Wallet balance, Unable to approve loan.' if @loan.loan_amount > current_user.wallet.amount
-    if @loan.update(state: 'approved')
+    return redirect_to home_index_path, alert: 'Low Wallet balance, Unable to approve loan.' if @loan.loan_amount > current_user.wallet.amount
+    if @loan.update(loan_params.merge(state: 'approved'))
       redirect_to home_index_path, notice: 'Loan approved successfully.'
     else
       redirect_to home_index_path, alert: 'Unable to approve loan.'
@@ -81,6 +81,6 @@ class LoansController < ApplicationController
   private
 
   def loan_params
-    params.require(:loan).permit(:loan_amount)
+    params.require(:loan).permit(:loan_amount, :interest_rate)
   end
 end
