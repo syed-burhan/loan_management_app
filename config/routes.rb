@@ -4,10 +4,9 @@ Rails.application.routes.draw do
   resources :loans do
     member do
       patch :approve
-      get :reject
-      get :confirm_interest_rate
-      get :reject_interest_rate
-      get :repay
+      patch :reject
+      patch :confirm
+      patch :repay
     end
   end
 

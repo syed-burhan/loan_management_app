@@ -1,6 +1,7 @@
 class HomeController < ApplicationController
   before_action :authenticate_user!
 
+  # /home
   def index
     if current_user.admin?
       @loans = Loan.excluding_admins

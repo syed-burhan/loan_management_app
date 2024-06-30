@@ -11,8 +11,9 @@ class Ability
     else
       can :read, Loan, user_id: user.id # Regular users can only read their own data
       can :create, Loan # Allow users to create new loans
-      can :confirm_interest_rate, Loan
-      can :reject_interest_rate, Loan
+      can :confirm, Loan
+      can :reject, Loan
+      can :repay, Loan
       cannot :index, Loan # Prevent regular users from accessing the index action
     end
   end
